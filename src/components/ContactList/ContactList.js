@@ -7,19 +7,20 @@ import Notification from '../Notifications/Notifications';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-
-  const filterContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
+  const nameFilter = useSelector(getFilter);
+  const filteredContacts = contacts?.filter(contact =>
+    contact.name.toLowerCase().includes(nameFilter.toLowerCase())
   );
 
-  if (filterContacts.length === 0) {
+  const visibleContacts = filteredContacts(contacts, nameFilter);
+
+  if (visibleContacts.length === 0) {
     return <Notification message="There is no contacts" />;
   }
 
   return (
     <List>
-      {filterContacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ id, name, number }) => (
         <ContactListItem key={id} contact={{ id, name, number }} />
       ))}
     </List>

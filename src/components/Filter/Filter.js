@@ -10,6 +10,11 @@ const Filter = () => {
   const handleChange = e => {
     dispatch(setFilter(e.target.value));
   };
+
+   if (contacts.length === 0) {
+     return null;
+   }
+
   return (
     <FilterLabel>
       Find contacts by Name
