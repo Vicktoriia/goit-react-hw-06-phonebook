@@ -11,21 +11,20 @@ const Filter = () => {
     dispatch(setFilter(e.target.value));
   };
 
-   if (contacts.length === 0) {
-     return null;
-   }
+  if (contacts.length === 0) {
+    return null;
+  }
 
   return (
-    <FilterLabel>
-      Find contacts by Name
+    <>
+      <FilterLabel>Find contacts by Name</FilterLabel>
       <FilterInput
         type="text"
         name="filter"
         placeholder="Search contact"
-        value={contacts}
         onChange={handleChange}
       />
-    </FilterLabel>
+    </>
   );
 };
 
