@@ -8,26 +8,23 @@ const ContactForm = () => {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
-  const nameIsInContacts = newName =>
-    contacts.some(({ name }) => name.toLowerCase() === newName.toLowerCase());
-
-  const handleSubmit = e => {
+  function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const number = form.number.value;
 
-    const isItInContacts = nameIsInContacts(name);
-
-    if (isItInContacts) {
-      alert(`"${name} already in contact list"`);
+    if (contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    )) {
+      alert(`"${name} already in contacts"`);
       form.reset();
       return;
     }
 
     dispatch(addContact(name, number));
     form.reset();
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
